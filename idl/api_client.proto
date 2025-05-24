@@ -1,0 +1,286 @@
+syntax = "proto3";
+package api_client;
+
+import "common.proto";
+option go_package="../pb";
+
+
+message InitClientRequest {
+  optional string client_id = 1;
+  optional bool ephemeral = 2;
+}
+
+message InitClientResponse {
+  optional common.Status status = 1;
+  optional string client_id = 2;
+}
+
+message ListClientsRequest {
+  optional int32 page = 1;
+  optional int32 page_size = 2;
+  optional string keyword = 3;
+}
+
+message ListClientsResponse {
+  optional common.Status status = 1;
+  optional int32 total = 2;
+  repeated common.Client clients = 3;
+}
+
+message GetClientRequest {
+  optional string client_id = 1;
+  optional string server_id = 2;
+}
+
+message GetClientResponse {
+  optional common.Status status = 1;
+  optional common.Client client = 2;
+}
+
+message DeleteClientRequest {
+  optional string client_id = 1;
+}
+
+message DeleteClientResponse {
+  optional common.Status status = 1;
+}
+
+message UpdateFRPCRequest {
+  optional string client_id = 1;
+  optional string server_id = 2;
+  optional bytes config = 3;
+  optional string comment = 4;
+  optional string frps_url = 5;
+}
+
+message UpdateFRPCResponse {
+  optional common.Status status = 1;
+}
+
+message RemoveFRPCRequest {
+  optional string client_id = 1;
+}
+
+message RemoveFRPCResponse {
+  optional common.Status status = 1;
+}
+
+message StopFRPCRequest {
+  optional string client_id = 1;
+}
+
+message StopFRPCResponse {
+  optional common.Status status = 1;
+}
+
+message StartFRPCRequest {
+  optional string client_id = 1;
+}
+
+message StartFRPCResponse {
+  optional common.Status status = 1;
+}
+
+message GetProxyStatsByClientIDRequest {
+  optional string client_id = 1;
+}
+
+message GetProxyStatsByClientIDResponse {
+  optional common.Status status = 1;
+  repeated common.ProxyInfo proxy_infos = 2;
+}
+
+message ListProxyConfigsRequest {
+  optional int32 page = 1;
+  optional int32 page_size = 2;
+  optional string keyword = 3;
+  optional string client_id = 4;
+  optional string server_id = 5;
+}
+
+message ListProxyConfigsResponse {
+  optional common.Status status = 1;
+  optional int32 total = 2;
+  repeated common.ProxyConfig proxy_configs = 3;
+}
+
+message CreateProxyConfigRequest {
+  optional string client_id = 1;
+  optional string server_id = 2;
+  optional bytes config = 3;
+  optional bool overwrite = 4;
+}
+
+message CreateProxyConfigResponse {
+  optional common.Status status = 1;
+}
+
+message DeleteProxyConfigRequest {
+  optional string client_id = 1;
+  optional string server_id = 2;
+  optional string name = 3;
+}
+
+message DeleteProxyConfigResponse {
+  optional common.Status status = 1;
+}
+
+message UpdateProxyConfigRequest {
+  optional string client_id = 1;
+  optional string server_id = 2;
+  optional string name = 3;
+  optional bytes config = 4;
+}
+
+message UpdateProxyConfigResponse {
+  optional common.Status status = 1;
+}
+
+message GetProxyConfigRequest {
+  optional string client_id = 1;
+  optional string server_id = 2;
+  optional string name = 3;
+}
+
+message GetProxyConfigResponse {
+  optional common.Status status = 1;
+  optional common.ProxyConfig proxy_config = 2;
+  optional common.ProxyWorkingStatus working_status = 3;
+}
+
+message StopProxyRequest {
+  optional string client_id = 1;
+  optional string server_id = 2;
+  optional string name = 3;
+}
+
+message StopProxyResponse {
+  optional common.Status status = 1;
+}
+
+message StartProxyRequest {
+  optional string client_id = 1;
+  optional string server_id = 2;
+  optional string name = 3;
+}
+
+message StartProxyResponse {
+  optional common.Status status = 1;
+}
+
+message CreateWorkerRequest {
+  optional string client_id = 1;
+  optional common.Worker worker = 2;
+}
+
+message CreateWorkerResponse {
+  optional common.Status status = 1;
+  optional string worker_id = 2;
+}
+
+message RemoveWorkerRequest {
+  optional string client_id = 1;
+  optional string worker_id = 2;
+}
+
+message RemoveWorkerResponse {
+  optional common.Status status = 1;
+}
+
+message UpdateWorkerRequest {
+  repeated string client_ids = 1;
+  optional common.Worker worker = 2;
+}
+
+message UpdateWorkerResponse {
+  optional common.Status status = 1;
+}
+
+message RunWorkerRequest {
+  optional string client_id = 1;
+  optional string worker_id = 2;
+}
+
+message RunWorkerResponse {
+  optional common.Status status = 1;
+}
+
+message StopWorkerRequest {
+  optional string client_id = 1;
+  optional string worker_id = 2;
+}
+
+message StopWorkerResponse {
+  optional common.Status status = 1;
+}
+
+message ListWorkersRequest {
+  optional int32 page = 1;
+  optional int32 page_size = 2;
+  optional string keyword = 3;
+  optional string client_id = 4;
+  optional string server_id = 5;
+}
+
+message ListWorkersResponse {
+  optional common.Status status = 1;
+  optional int32 total = 2;
+  repeated common.Worker workers = 3;
+}
+
+// 为 client 在一个 server 创建ingress
+message CreateWorkerIngressRequest {
+  optional string client_id = 1;
+  optional string server_id = 2;
+  optional string worker_id = 3;
+}
+
+message CreateWorkerIngressResponse {
+  optional common.Status status = 1;
+}
+
+message GetWorkerIngressRequest {
+  optional string worker_id = 1;
+}
+
+message GetWorkerIngressResponse {
+  optional common.Status status = 1;
+  repeated common.ProxyConfig proxy_configs = 2;
+}
+
+message GetWorkerRequest {
+  optional string worker_id = 1;
+}
+
+message GetWorkerResponse {
+  optional common.Status status = 1;
+  optional common.Worker worker = 2;
+  repeated common.Client clients = 3; // worker 已经部署到的 client
+}
+
+message GetWorkerStatusRequest {
+  optional string worker_id = 1;
+}
+
+message GetWorkerStatusResponse {
+  optional common.Status status = 1;
+  map<string, string> worker_status = 2; // client_id -> status
+}
+
+message InstallWorkerdRequest {
+  optional string client_id = 1;
+  optional string download_url = 2;
+}
+
+message InstallWorkerdResponse {
+  optional common.Status status = 1;
+}
+
+message RedeployWorkerRequest {
+  optional string worker_id = 1;
+  repeated string client_ids = 2;
+}
+
+message RedeployWorkerResponse {
+  optional common.Status status = 1;
+}

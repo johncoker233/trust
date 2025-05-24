@@ -1,0 +1,121 @@
+syntax = "proto3";
+
+package common;
+option go_package="../pb";
+
+enum RespCode {
+  RESP_CODE_UNSPECIFIED = 0;
+  RESP_CODE_SUCCESS = 1;
+  RESP_CODE_NOT_FOUND = 2;
+  RESP_CODE_ALREADY_EXISTS = 3;
+  RESP_CODE_INVALID = 4;
+  RESP_CODE_FINISH = 5;
+  RESP_CODE_UNAUTHORIZED = 6;
+}
+
+enum ClientType {
+  CLIENT_TYPE_UNSPECIFIED = 0;
+  CLIENT_TYPE_FRPC = 1;
+  CLIENT_TYPE_FRPS = 2;
+}
+
+message Status {
+  RespCode code = 1;
+  string message = 2;
+}
+
+message CommonRequest {
+  optional string data = 1;
+}
+
+message CommonResponse {
+  optional Status status = 1;
+  optional string data = 2;
+}
+
+message Client {
+  optional string id = 1;
+  optional string secret = 2;
+  optional string config = 3;
+  optional string comment = 5; // 用户自定义的备注
+  optional string server_id = 6;
+  optional bool stopped = 7;
+  repeated string client_ids = 8; // some client can connected to more than one server, make a shadow client to handle this
+  optional string origin_client_id = 9;
+  optional string frps_url = 10; // 客户端用于连接frps的url，解决 frp 在 CDN 后的问题，格式类似 [tcp/ws/wss/quic/kcp]://example.com:7000
+  optional bool ephemeral = 11; // 是否临时节点
+  optional int64 last_seen_at = 12; // 最后一次心跳时间戳
+}
+
+message Server {
+  optional string id = 1;
+  optional string secret = 2;
+  optional string ip = 3;
+  optional string config = 4; // 在定义上，ip和port只是为了方便使用
+  optional string comment = 5; // 用户自定义的备注
+  repeated string frps_urls = 6; // 客户端用于连接frps的url，解决 frp 在 CDN 后的问题，格式类似 [tcp/ws/wss/quic/kcp]://example.com:7000，可以有多个
+}
+
+message User {
+	optional int64 UserID = 1;
+	optional int64 TenantID = 2;
+	optional string UserName = 3;
+	optional string Email = 4;
+	optional string Status = 5;
+	optional string Role = 6;
+	optional string Token = 7;
+  optional string RawPassword = 8;
+}
+
+message ProxyInfo {
+	optional string name = 1;
+	optional string type = 2;
+	optional string client_id = 3;
+	optional string server_id = 4;
+	optional int64 today_traffic_in = 5;
+	optional int64 today_traffic_out = 6;
+	optional int64 history_traffic_in = 7;
+	optional int64 history_traffic_out = 8;
+	optional bool first_sync = 9;
+}
+
+message ProxyConfig {
+  optional uint32 id = 1;
+	optional string name = 2;
+	optional string type = 3;
+	optional string client_id = 4;
+	optional string server_id = 5;
+  optional string config = 6;
+  optional string origin_client_id = 7;
+  optional bool stopped = 8;
+}
+
+message ProxyWorkingStatus {
+  optional string name = 1;
+  optional string type = 2;
+  optional string status = 3;
+  optional string err = 4;
+  optional string remote_addr = 5;
+}
+
+message Worker {
+	optional string worker_id = 1;
+	optional string name = 2; // worker's name, also use at worker routing, must be unique, default is UID
+	optional uint32 user_id = 3; // worker's user id
+  optional uint32 tenant_id = 4;
+	optional Socket socket = 5; // worker's socket, platfrom will obtain free port while init worker
+	optional string code_entry = 6; // worker's entry file, default is 'entry.js'
+	optional string code = 7; // worker's code
+	optional string config_template = 8; // worker's capnp file template
+}
+
+// one WorkerList for one workerd instance
+message WorkerList {
+	repeated Worker workers = 1;
+	optional string nodename = 2; // workerd runner host name, for HA
+}
+
+message Socket {
+  optional string name = 1;
+  optional string address = 2;
+}

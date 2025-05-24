@@ -1,0 +1,60 @@
+syntax = "proto3";
+package api_master;
+
+import "common.proto";
+option go_package="../pb";
+
+message ClientStatus {
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_ONLINE = 1;
+    STATUS_OFFLINE = 2;
+    STATUS_ERROR = 3;
+  }
+  common.ClientType client_type = 1;
+  string client_id = 2;
+  Status status = 3;
+  int32 ping = 4; // 单位为毫秒
+  optional ClientVersion version = 5;
+  optional string addr = 6;
+  optional int64 connect_time = 7; // 连接建立的时间
+}
+
+message ClientVersion {
+	string GitVersion = 1;
+	string GitCommit = 2;
+	string BuildDate = 3;
+	string GoVersion = 4;
+	string Compiler = 5;
+	string Platform = 6;
+  string GitBranch = 7;
+}
+
+message GetClientsStatusRequest {
+  common.ClientType client_type = 1;
+  repeated string client_ids = 2;
+}
+
+message GetClientsStatusResponse {
+  optional common.Status status = 1;
+  map<string, ClientStatus> clients = 2;
+}
+
+message GetClientCertRequest {
+  common.ClientType client_type = 1;
+  string client_id = 2;
+  string client_secret = 3;
+}
+
+message GetClientCertResponse {
+  optional common.Status status = 1;
+  bytes cert = 2;
+}
+
+message StartSteamLogRequest {
+  repeated string pkgs = 1; // 需要获取哪些包的日志
+}
+
+message StartSteamLogResponse {
+  optional common.Status status = 1;
+}

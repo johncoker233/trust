@@ -1,0 +1,39 @@
+syntax = "proto3";
+package api_user;
+
+import "common.proto";
+option go_package="../pb";
+
+message GetUserInfoRequest {}
+
+message GetUserInfoResponse {
+  optional common.Status status = 1;
+  optional common.User user_info = 2;
+}
+
+message UpdateUserInfoRequest {
+  optional common.User user_info = 1;
+}
+
+message UpdateUserInfoResponse {
+  optional common.Status status = 1;
+}
+
+message GetPlatformInfoRequest {}
+
+message GetPlatformInfoResponse {
+  optional common.Status status = 1;
+  int32 total_client_count = 2;
+  int32 total_server_count = 3;
+  int32 unconfigured_client_count = 4;
+  int32 unconfigured_server_count = 5;
+  int32 configured_client_count = 6;
+  int32 configured_server_count = 7;
+  string master_rpc_host = 8;
+  int32 master_rpc_port = 9;
+  int32 master_api_port = 10;
+  string master_api_scheme = 11;
+  string client_rpc_url = 12;
+  string client_api_url = 13;
+  string github_proxy_url = 14;
+}

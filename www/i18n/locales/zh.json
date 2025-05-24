@@ -1,0 +1,627 @@
+{
+  "app": {
+    "title": "FRP-Panel",
+    "subtitle": "FRP 隧道面板",
+    "description": "一个多节点的 FRP WebUI，用于 [FRP] 服务端和客户端管理，是 [Cloudflare Tunnel] 和 [Tailscale Funnel] 的开源替代方案",
+    "github": {
+      "navigate": "项目地址：",
+      "repo": "VaalaCat/frp-panel"
+    }
+  },
+  "client": {
+    "detail": {
+      "title": "客户端信息",
+      "version": "版本",
+      "buildDate": "编译时间",
+      "goVersion": "Go版本",
+      "platform": "客户端平台",
+      "address": "客户端地址",
+      "connectTime": "连接时间"
+    },
+    "create": {
+      "submitting": "正在创建客户端...",
+      "error": "创建客户端失败",
+      "success": "创建客户端成功",
+      "button": "新建",
+      "title": "新建客户端",
+      "description": "创建新的客户端用于连接，客户端ID必须唯一",
+      "id": "客户端ID",
+      "submit": "创建"
+    },
+    "id": "ID (点击查看安装命令)",
+    "status": "配置状态",
+    "status_configured": "已配置",
+    "status_unconfigured": "未配置",
+    "info": "运行时信息/版本",
+    "secret": "密钥 (点击查看启动命令)",
+    "install": {
+      "title": "安装命令",
+      "description": "请选择您的操作系统并复制相应的安装命令",
+      "use_github_proxy_url": "使用 GitHub 代理",
+      "github_proxy_url": "GitHub 代理 URL",
+      "windows": "Windows",
+      "linux": "Linux"
+    },
+    "need_upgrade": "需要升级",
+    "temp_node": "临时",
+    "start": {
+      "title": "启动命令",
+      "description": "复制并运行以下命令来启动 frp-panel 客户端"
+    },
+    "delete": {
+      "success": "删除成功",
+      "failed": "删除失败",
+      "title": "确定删除该客户端?",
+      "description": "此操作无法撤消。您确定要永久从我们的服务器中删除该客户端?",
+      "warning": "删除后运行中的客户端将无法通过现有参数再次连接，如果您需要删除客户端对外的连接，可以选择暂停客户端",
+      "confirm": "确定"
+    },
+    "operation": {
+      "stop_success": "停止成功",
+      "stop_failed": "停止失败",
+      "start_success": "启动成功",
+      "start_failed": "启动失败",
+      "update_failed": "更新失败",
+      "update_success": "更新成功"
+    },
+    "actions_menu": {
+      "open_menu": "打开菜单",
+      "title": "客户端操作",
+      "copy_success": "命令复制成功，如果复制失败，请点击 ID/密钥 字段手动复制",
+      "copy_failed": "获取平台信息失败，如果复制不成功，请点击 ID/密钥 字段手动复制",
+      "copy_start_command": "复制启动命令",
+      "copy_install_command": "复制服务安装命令",
+      "edit_config": "修改配置",
+      "download_failed": "获取平台信息失败",
+      "download_config": "下载配置",
+      "realtime_log": "实时日志",
+      "remote_terminal": "远程终端",
+      "pause": "暂停",
+      "resume": "启动",
+      "delete": "删除"
+    },
+    "join": {
+      "button": "批量配置",
+      "title": "批量配置",
+      "description": "提前下载好二进制文件，运行以下命令，client 将自动生成配置文件保存",
+      "sign_token": "生成令牌"
+    },
+    "editor": {
+      "comment_title": "节点 {{id}} 的备注",
+      "comment_placeholder": "备注",
+      "config_title": "客户端 {{id}} 配置文件`frpc.json`内容",
+      "config_description": "只需要配置proxies和visitors字段，认证信息和服务器连接信息会由系统补全",
+      "config_placeholder": "配置文件内容"
+    },
+    "stats": {
+      "title": "客户端统计",
+      "description": "查看客户端流量统计信息",
+      "label": "客户端"
+    },
+    "status_online": "在线",
+    "status_offline": "离线",
+    "status_error": "错误",
+    "status_pause": "已暂停",
+    "status_unknown": "未知"
+  },
+  "selector": {
+    "client": {
+      "placeholder": "客户端名称"
+    },
+    "common": {
+      "placeholder": "请选择...",
+      "notFound": "未找到结果",
+      "loading": "加载中..."
+    },
+    "proxy": {
+      "notFound": "未找到隧道",
+      "placeholder": "隧道名称"
+    },
+    "server": {
+      "placeholder": "服务端名称"
+    }
+  },
+  "table": {
+    "pagination": {
+      "rowsPerPage": "行 每页",
+      "page": "第 {{current}} 页, 共 {{total}} 页",
+      "navigation": {
+        "first": "第一页",
+        "previous": "前一页",
+        "next": "下一页",
+        "last": "最后页"
+      }
+    },
+    "filter": {
+      "placeholder": "根据 {{column}} 筛选"
+    },
+    "noData": "没有数据"
+  },
+  "input": {
+    "keyword": {
+      "placeholder": "请输入关键词"
+    },
+    "search": "搜索",
+    "list": {
+      "placeholder": "请输入...",
+      "add": "添加"
+    }
+  },
+  "traffic": {
+    "chart": {
+      "inbound": "入站",
+      "today": "今日",
+      "history": "历史",
+      "outbound": "出站",
+      "title": "流量详情",
+      "pie": {
+        "inbound": "入站",
+        "outbound": "出站"
+      }
+    },
+    "today": {
+      "inbound": "今日入站",
+      "outbound": "今日出站",
+      "total": "今日总流量"
+    },
+    "history": {
+      "inbound": "历史入站",
+      "outbound": "历史出站",
+      "total": "历史总流量"
+    }
+  },
+  "common": {
+    "download": "点击这里下载",
+    "copy": "复制",
+    "submit": "提交",
+    "login": "登录",
+    "register": "注册",
+    "userInfo": "用户信息",
+    "logout": "退出登录",
+    "add": "添加",
+    "back": "返回",
+    "saving": "保存中",
+    "save": "保存",
+    "success": "成功",
+    "failed": "失败",
+    "cancel": "取消",
+    "clientType": "客户端类型",
+    "disconnect": "断开连接",
+    "connect": "连接",
+    "stream_log_pkgs_select": "捕获日志的模块"
+  },
+  "frpc": {
+    "client_plugins": {
+      "plugin_type": "插件类型",
+      "select_plugin_type": "选择插件类型",
+      "http_local_addr": "HTTP 本地地址",
+      "http_host_header_rewrite": "HTTP 主机头重写",
+      "http_user": "HTTP 用户名",
+      "http_password": "HTTP 密码"
+    },
+    "form": {
+      "title": "编辑客户端",
+      "description": {
+        "warning": "注意⚠️：选择的「服务端」必须提前配置！",
+        "instruction": "选择客户端和服务端以配置"
+      },
+      "advanced": {
+        "title": "高级模式",
+        "description": "编辑客户端原始配置文件"
+      },
+      "server": "服务端",
+      "client": "客户端",
+      "frps_url": {
+        "title": "FRP 服务端覆盖地址 - 可选",
+        "hint": "可以覆盖 master 存储的服务端地址，用于处理端口转发或反向代理/CDN时，域名/IP/端口和真实端口不一致的问题。格式：[tcp/kcp/websocket]://127.0.0.1:7000"
+      },
+      "comment": {
+        "title": "节点 {{id}} 的备注",
+        "hint": "可以到高级模式修改备注哦！",
+        "empty": "空空如也"
+      }
+    },
+    "plugins": {
+      "local_addr": "本地地址",
+      "host_header_rewrite": "主机头重写",
+      "crt_path": "证书路径",
+      "key_path": "密钥路径",
+      "username": "用户名",
+      "password": "密码",
+      "local_path": "本地路径",
+      "strip_prefix": "前缀去除",
+      "http_user": "HTTP 用户名",
+      "http_password": "HTTP 密码",
+      "unix_domain_socket_path": "Unix 域套接字路径"
+    }
+  },
+  "proxy": {
+    "status": {
+      "create": "创建隧道状态",
+      "name_exists": "名称重复",
+      "update": "更新隧道状态",
+      "success": "更新成功",
+      "error": "更新失败"
+    },
+    "form": {
+      "add": "新增隧道",
+      "name": "名称",
+      "protocol": "协议",
+      "type": "类型",
+      "confirm": "确定",
+      "config": "隧道配置",
+      "expand_other": "展开其他",
+      "delete": "删除",
+      "tunnel_name": "隧道名称",
+      "type_label": "类型:「{{type}}」",
+      "submit": "提交变更",
+      "access_method": "访问方式",
+      "local_port": "本地端口",
+      "local_ip": "本地IP",
+      "remote_port": "远程端口",
+      "use_plugin": "使用插件",
+      "save_changes": "暂存修改",
+      "secret_key": "密钥",
+      "subdomain": "子域名",
+      "custom_domains": "自定义域名",
+      "domain_description": "「子域名」和「自定义域名」可以同时配置，但二者至少有一个不为空。如果 frps 配置了「域名后缀」，则「自定义域名」中不能是属于「域名后缀」的「子域名」或者「泛域名」",
+      "more_settings": "更多设置",
+      "route": "路由",
+      "enable_http_auth": "启用 HTTP 认证",
+      "username": "用户名",
+      "password": "密码",
+      "subdomain_placeholder": "请输入子域名"
+    },
+    "type": {
+      "http": "HTTP",
+      "tcp": "TCP",
+      "udp": "UDP",
+      "stcp": "STCP"
+    },
+    "config": {
+      "create": "创建",
+      "create_proxy": "创建隧道",
+      "create_proxy_description": "将客户端的服务暴露在服务端，同一个客户端隧道名称必须唯一",
+      "create_success": "创建成功",
+      "create_failed": "创建失败",
+      "select_server": "选择服务器",
+      "select_client": "选择客户端",
+      "advanced_mode": "高级模式",
+      "select_proxy_type": "选择隧道类型",
+      "proxy_name": "隧道名称",
+      "raw_json": "原始配置文件",
+      "invalid_json": "JSON非法",
+      "draft": "暂存",
+      "invalid_config": "配置不正确",
+      "submit": "提交"
+    },
+    "action": {
+      "delete_success": "删除成功",
+      "delete_failed": "删除失败",
+      "stop_success": "停止成功",
+      "stop_failed": "停止失败",
+      "start_success": "启动成功",
+      "start_failed": "启动失败",
+      "edit": "编辑",
+      "delete": "删除",
+      "delete_tunnel": "删除隧道",
+      "delete_attention_title": "隧道将被永久删除，请确认",
+      "delete_attention_description": "删除后将无法恢复，请谨慎操作",
+      "delete_attention_confirm": "确认删除",
+      "title": "隧道操作"
+    },
+    "item": {
+      "proxy_name": "隧道名称",
+      "proxy_type": "隧道类型",
+      "client_id": "客户端ID",
+      "server_id": "服务端ID",
+      "status": "状态",
+      "visit_preview": "访问预览"
+    },
+    "stats": {
+      "label": "隧道名称",
+      "tunnel_traffic": "隧道：{{name}}"
+    }
+  },
+  "server": {
+    "configuration": "服务器配置",
+    "warning": {
+      "title": "警告⚠️：修改配置文件后服务器将退出",
+      "dockerHint": "如果您使用 docker 容器且启动命令中包含 --restart=unless-stopped 或 --restart=always，则无需担心。",
+      "systemdHint": "如果您使用 systemd 安装，则无需担心。"
+    },
+    "selectHint": "选择一个服务器来管理 Frps 服务",
+    "advancedMode": {
+      "title": "高级模式",
+      "description": "编辑服务器原始配置文件"
+    },
+    "serverLabel": "服务器",
+    "frpsUrl": {
+      "title": "FRP 服务器覆盖地址 - 可选",
+      "description": "客户端可以使用该地址连接，而不是使用默认的IP。在端口转发/CDN/反向代理时很有用。格式：[tcp/kcp/websocket]://127.0.0.1:7000"
+    },
+    "operation": {
+      "update_failed": "修改失败",
+      "update_success": "修改成功",
+      "update_title": "修改服务端状态"
+    },
+    "editor": {
+      "comment": "节点 {{id}} 的备注",
+      "comment_placeholder": "备注",
+      "config_title": "节点 {{id}} 配置文件`frps.json`内容",
+      "config_description": "只需要配置端口和IP等字段，认证信息会由系统补全",
+      "config_placeholder": "配置文件内容"
+    },
+    "form": {
+      "comment_title": "节点 {{id}} 的备注",
+      "comment_hint": "可以到高级模式修改备注哦！",
+      "comment_empty": "空空如也",
+      "public_host": "公网地址",
+      "bind_port": "FRPs 监听端口",
+      "bind_addr": "FRPs 监听地址",
+      "proxy_bind_addr": "代理监听地址",
+      "vhost_http_port": "HTTP 监听端口",
+      "subdomain_host": "域名后缀",
+      "quic_bind_port": "Quic 监听端口",
+      "kcp_bind_port": "KCP 监听端口"
+    },
+    "create": {
+      "submitting": "正在创建服务端...",
+      "error": "创建服务端失败",
+      "success": "创建服务端成功",
+      "button": "新建",
+      "title": "新建服务端",
+      "description": "创建新的服务端用于提供服务，服务端ID必须唯一",
+      "id": "服务端ID",
+      "ip": "IP地址/域名",
+      "submit": "创建"
+    },
+    "id": "ID (点击查看安装命令)",
+    "status": "配置状态",
+    "status_configured": "已配置",
+    "status_unconfigured": "未配置",
+    "info": "运行信息/版本",
+    "ip": "IP地址",
+    "secret": "密钥 (点击查看启动命令)",
+    "install": {
+      "title": "安装命令",
+      "description": "请选择您的操作系统并复制相应的安装命令",
+      "windows": "Windows",
+      "linux": "Linux"
+    },
+    "start": {
+      "title": "启动命令",
+      "description": "复制并运行以下命令来启动 frp-panel 服务端"
+    },
+    "delete": {
+      "success": "删除成功",
+      "failed": "删除失败",
+      "title": "确定删除该服务器?",
+      "description": "此操作无法撤消。您确定要永久从我们的服务器中删除该服务器?",
+      "warning": "删除后运行中的服务器将无法通过现有参数再次连接，如果您需要删除服务器对外的连接，可以选择暂停服务器",
+      "confirm": "确定"
+    },
+    "actions_menu": {
+      "open_menu": "打开菜单",
+      "title": "服务器操作",
+      "copy_success": "复制成功，如果复制不成功，请点击ID字段手动复制",
+      "copy_failed": "获取平台信息失败，如果复制不成功，请点击ID字段手动复制",
+      "copy_command": "复制启动命令",
+      "edit_config": "修改配置",
+      "download_failed": "获取平台信息失败",
+      "download_config": "下载配置",
+      "realtime_log": "实时日志",
+      "remote_terminal": "远程终端",
+      "delete": "删除"
+    },
+    "status_online": "在线",
+    "status_offline": "离线",
+    "status_error": "错误",
+    "status_unknown": "未知",
+    "status_pause": "已暂停"
+  },
+  "auth": {
+    "loggingIn": "登录中，请稍候",
+    "loginSuccess": "登录成功，正在跳转到首页",
+    "loginFailed": "登录失败，请重试",
+    "usernamePlaceholder": "用户名",
+    "password": "密码",
+    "passwordPlaceholder": "••••••••",
+    "error": "错误",
+    "registering": "注册中，请稍候",
+    "registerSuccess": "注册成功，正在跳转到登录页",
+    "registerFailed": "注册失败，请重试",
+    "emailPlaceholder": "邮箱地址",
+    "loginTitle": "登录",
+    "inputCredentials": "请输入您的账号信息",
+    "noAccount": "还没有账号？",
+    "register": "注册",
+    "registerTitle": "注册",
+    "haveAccount": "已有账号？",
+    "login": "登录"
+  },
+  "platform": {
+    "configuredServers": "已配置服务端数",
+    "unit": "个",
+    "menuHint": "请前往左侧🫲菜单修改",
+    "configuredClients": "已配置客户端数",
+    "unconfiguredServers": "未配置服务端数",
+    "unconfiguredClients": "未配置客户端数",
+    "totalServers": "服务端总数",
+    "totalClients": "客户端总数"
+  },
+  "refresh": {
+    "data": "刷新数据"
+  },
+  "team": {
+    "title": "租户"
+  },
+  "userInfo": {
+    "profileUpdated": "用户信息已更新",
+    "updateFailed": "更新用户信息失败",
+    "loading": "正在加载用户信息",
+    "yourProfile": "您的用户信息",
+    "manageAccountDetails": "管理账户详情",
+    "userID": "用户ID",
+    "tenantID": "租户ID",
+    "name": "姓名",
+    "placeholderName": "请输入姓名",
+    "email": "邮箱",
+    "placeholderEmail": "请输入邮箱",
+    "role": "角色",
+    "roleDescription": "管理员(admin)或普通用户(normal)",
+    "changePassword": "修改密码",
+    "newPassword": "新密码",
+    "placeholderNewPassword": "请输入新密码",
+    "confirmPassword": "确认新密码",
+    "placeholderConfirmNewPassword": "请再次输入新密码",
+    "saveChanges": "保存更改",
+    "confirmSaveTitle": "确认保存",
+    "confirmSaveDescription": "您确定要保存更改吗？",
+    "cancel": "取消",
+    "confirm": "确认"
+  },
+  "worker": {
+    "client_install_workerd": {
+      "success": "Workerd安装成功",
+      "error": "Workerd安装失败",
+      "title": "安装Workerd",
+      "description": "从URL安装Workerd二进制文件到客户端",
+      "download_url": "Workerd二进制文件下载URL",
+      "placeholder": "请输入下载URL",
+      "button": "安装"
+    },
+    "status_running": "运行中",
+    "status_stopped": "已停止",
+    "status_error": "错误",
+    "status_unknown": "未知",
+    "deploy": {
+      "title": "部署",
+      "add_client": "添加部署",
+      "select_client": "选择客户端",
+      "client_description": "请选择Worker需要部署到的客户端",
+      "no_clients": "没有可用的客户端"
+    },
+    "edit": {
+      "save_success": "保存成功",
+      "save_error": "保存失败",
+      "title": "编辑",
+      "info_tab": "信息",
+      "code_tab": "代码",
+      "template_tab": "模板"
+    },
+    "info": {
+      "basic_info": "基本信息",
+      "info_description": "这里是基本信息，你可以修改Worker的相关描述",
+      "worker_id": "WorkerID",
+      "worker_name": "Worker名称",
+      "name_placeholder": "请输入Worker名称",
+      "resources": "相关资源",
+      "clients": "部署",
+      "ingresses": "入口"
+    },
+    "ingress": {
+      "create_success": "创建成功",
+      "create_failed": "创建失败",
+      "client_required": "客户端是必需的",
+      "server_required": "服务器是必需的",
+      "select_client": "选择客户端",
+      "select_server": "选择服务器",
+      "creating": "正在创建",
+      "create_submit": "创建",
+      "title": "入口",
+      "create": "创建",
+      "create_title": "创建入口",
+      "create_description": "创建一个新的入口",
+      "no_ingress": "没有入口",
+      "edit": "编辑",
+      "delete": {
+        "title": "删除入口",
+        "description": "您确定要删除此入口吗？",
+        "button": "删除"
+      },
+      "delete_success": "入口已成功删除",
+      "delete_description": "入口已成功删除"
+    },
+    "create": {
+      "success": "创建成功",
+      "error": "创建失败",
+      "button": "创建",
+      "title": "创建Worker",
+      "description": "创建一个新的Worker",
+      "clientIdLabel": "客户端ID",
+      "nameLabel": "Worker名称",
+      "namePlaceholder": "请输入Worker名称",
+      "creating": "正在创建",
+      "submit": "提交"
+    },
+    "columns": {
+      "name": "Worker名称",
+      "status": "状态",
+      "id": "WorkerID"
+    },
+    "actions_menu": {
+      "delete": "删除",
+      "redeploy_worker": "重启",
+      "title": "操作",
+      "edit": "编辑"
+    },
+    "delete": {
+      "title": "删除Worker",
+      "description": "确定要删除这个Worker吗？",
+      "confirm": "确认删除"
+    },
+    "status": {
+      "no_resources": "无资源",
+      "unusable": "不可用",
+      "unhealthy": "不健康",
+      "healthy": "健康",
+      "degraded": "降级",
+      "clients": "部署",
+      "ingresses": "入口",
+      "running": "运行中"
+    },
+    "status_text": "状态"
+  },
+  "status": {
+    "new": "新建",
+    "wait_start": "等待启动",
+    "start_error": "启动错误",
+    "running": "运行中",
+    "check_failed": "检查失败",
+    "error": "错误",
+    "unknown": "未知"
+  },
+  "nav": {
+    "clients": "客户端",
+    "servers": "服务端",
+    "editTunnel": "编辑隧道",
+    "editClient": "编辑客户端",
+    "editServer": "编辑服务端",
+    "trafficStats": "流量统计",
+    "realTimeLog": "实时日志",
+    "console": "控制台",
+    "workers": "函数"
+  },
+  "frpc_form": {
+    "add": "新增隧道",
+    "name": "名称",
+    "protocol": "协议",
+    "type": "类型",
+    "confirm": "确定",
+    "config": "隧道配置",
+    "expand": "点击展开{{count}}条隧道",
+    "tunnel_name": "隧道名称",
+    "delete": "删除",
+    "type_label": "类型:「{{type}}」",
+    "access_method": "访问方式",
+    "local_port": "本地端口",
+    "remote_port": "远程端口",
+    "local_ip": "本地IP",
+    "subdomain": "子域名",
+    "secret_key": "密钥",
+    "save": "保存",
+    "save_success": "保存成功",
+    "save_error": "保存失败"
+  }
+}
